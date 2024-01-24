@@ -1,5 +1,5 @@
-const MIGRATIONS_BUILD_DEFAULT_PATH = 'dist/shared/migrations/*.js';
-const MIGRATIONS_CLI_PATH = '../../../shared/migrations/*.js';
+const MIGRATIONS_BUILD_DEFAULT_PATH = 'dist/common/migrations/*.js';
+const MIGRATIONS_CLI_PATH = '../../../common/migrations/*.js';
 const JWT_DEFAULT_EXPRISE_IN = '60s';
 
 export default () => ({
