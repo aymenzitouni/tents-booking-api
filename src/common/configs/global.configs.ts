@@ -11,7 +11,7 @@ export default () => ({
     username: String(process.env.POSTGRES_DB_USERNAME),
     password: String(process.env.POSTGRES_DB_PASSWORD),
     database: String(process.env.POSTGRES_DB_NAME),
-    ssl: true,
+    ssl: false,
     poolSize: 60,
     autoLoadEntities: false,
     synchronize: false,
