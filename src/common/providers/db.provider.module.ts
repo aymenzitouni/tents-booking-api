@@ -4,6 +4,7 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { DataSource, DataSourceOptions, Repository } from 'typeorm';
 import globalConfigs from '../configs/global.configs';
 import models from '../models';
+import { UsersModel } from '../models/users.model';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import models from '../models';
         return globalConfigs().database as TypeOrmModuleOptions;
       },
     }),
-    TypeOrmModule.forFeature([...models]),
+    TypeOrmModule.forFeature([UsersModel]),
   ],
   providers: [],
   exports: [],
@@ -27,9 +28,9 @@ export async function createDataSource() {
   console.log('returning datasource with config', dbConfig);
   return new DataSource({
     ...dbConfig,
-    migrations: ['src/shared/migrations/*'],
+    migrations: ['src/common/migrations/*'],
     synchronize: false,
-    entities: [...models],
+    entities: [UsersModel],
     migrationsTableName: 'typeorm_migrations',
   } as DataSourceOptions);
 }
