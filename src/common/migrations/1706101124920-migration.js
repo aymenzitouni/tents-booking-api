@@ -1,6 +1,9 @@
 const { MigrationInterface, QueryRunner } = require('typeorm');
 
 module.exports = class Migration1706101124920 {
+  constructor() {
+    console.log('Migration1706101124920');
+  }
   name = 'Migration1706101124920';
 
   async up(queryRunner) {
