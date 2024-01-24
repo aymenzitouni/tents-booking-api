@@ -1,5 +1,7 @@
 const MIGRATIONS_BUILD_DEFAULT_PATH = 'dist/shared/migrations/*.js';
 const MIGRATIONS_CLI_PATH = '../../../shared/migrations/*.js';
+const JWT_DEFAULT_EXPRISE_IN = '60s';
+
 export default () => ({
   port: parseInt(process.env.POSTGRES_DB_PORT, 10) || 3000,
   database: {
@@ -18,5 +20,10 @@ export default () => ({
     cli: {
       migrationsDir: MIGRATIONS_CLI_PATH,
     },
+  },
+  jwt: {
+    global: true,
+    secret: process.env.JWT_SECRET,
+    signOptions: { expiresIn: JWT_DEFAULT_EXPRISE_IN },
   },
 });
