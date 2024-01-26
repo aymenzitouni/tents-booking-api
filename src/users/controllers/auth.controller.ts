@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post, UseGuards } from '@nestjs/common';
 import { SignInBodyDTO } from './DTOs/body.dtos';
 import { AuthService } from '../services/auth.service';
 
 import { plainToClass } from 'class-transformer';
+import { AuthGuard, AuthUser } from '../services/auth.guard';
 
 @Controller({ path: 'auth', version: '1' })
 export class AuthController {
@@ -15,5 +16,8 @@ export class AuthController {
   }
 
   @Get()
-  async getAuth() {}
+  @UseGuards(AuthGuard)
+  async getAuth(@AuthUser() user) {
+    return user;
+  }
 }

@@ -10,4 +10,8 @@ export class UsersRepository {
   async findOneByEmail(email: string) {
     return await this.users.findOne({ where: { email } });
   }
+
+  async findOneById(userId: string) {
+    return await this.users.findOne({ where: { id: userId } });
+  }
 }

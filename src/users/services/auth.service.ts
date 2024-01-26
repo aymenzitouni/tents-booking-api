@@ -1,5 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { SignInCommand } from './commands/auth.service.commands';
+import {
+  SignInCommand,
+  VerifyAuthCommand,
+} from './commands/auth.service.commands';
 import { JwtHelperService } from '../../common/helpers/jwt.helper.service';
 import { CryptoHelperService } from '../../common/helpers/crypto.helper.service';
 import { UsersRepository } from '../../common/repositories/users.repository';
@@ -25,5 +28,15 @@ export class AuthService {
     const authToken = this.jwtHelperService.signAuthJwt(user.id);
     delete user.password;
     return { authToken, user };
+  }
+
+  async verifyAuth(command: VerifyAuthCommand) {
+    const decodedToken = this.jwtHelperService.verifyAuthToken(command.token);
+    if (!decodedToken || !decodedToken?.userId)
+      throw new Error('Unauthenticated');
+    const user = await this.usersRepository.findOneById(decodedToken?.userId);
+    if (!user) throw new Error('Unauthenticated');
+    delete user?.password;
+    return user;
   }
 }
