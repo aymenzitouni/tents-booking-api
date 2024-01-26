@@ -7,4 +7,8 @@ export class JwtHelperService {
   signAuthJwt(userId: string) {
     return this.jwtService.sign({ userId });
   }
+
+  verifyAuthToken(token: string) {
+    return this.jwtService.verify(token);
+  }
 }
