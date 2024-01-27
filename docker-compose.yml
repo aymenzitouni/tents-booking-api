@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: tents-booking-api
+    image: tents-booking-api
+    ports:
+      - '3000:3000'
+
+    environment:
+      - PORT=${PORT}
+      - POSTGRES_DB_HOST=db
+      - POSTGRES_DB_PORT=${POSTGRES_DB_PORT}
+      - POSTGRES_DB_USERNAME=${POSTGRES_DB_USERNAME}
+      - POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - POSTGRES_DB_NAME=${POSTGRES_DB_NAME}
+      - JWT_SECRET=${JWT_SECRET}
+
+    depends_on:
+      - db
+  db:
+    container_name: postgres_db
+    image: postgres:14.1
+    environment:
+      - POSTGRES_USER=${POSTGRES_DB_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB_NAME}
+    volumes:
+      - ../database:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
