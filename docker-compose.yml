@@ -13,19 +13,22 @@ services:
       - POSTGRES_DB_PORT=${POSTGRES_DB_PORT}
       - POSTGRES_DB_USERNAME=${POSTGRES_DB_USERNAME}
       - POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
-      - POSTGRES_DB_NAME=${POSTGRES_DB_NAME}
+      - POSTGRES_DB_NAME=${POSTGRES_DB_USERNAME}
       - JWT_SECRET=${JWT_SECRET}
+      - DEFAULT_USER_EMAIL=${DEFAULT_USER_EMAIL}
+      - DEFAULT_USER_PASSWORD=${DEFAULT_USER_PASSWORD}
 
     depends_on:
       - db
+
   db:
     container_name: postgres_db
     image: postgres:14.1
     environment:
       - POSTGRES_USER=${POSTGRES_DB_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB_NAME}
-    volumes:
-      - ../database:/var/lib/postgresql/data
+      # - POSTGRES_DB=testdb
+    # volumes:
+    #   - ../database:/var/lib/postgresql/data
     ports:
       - '5432:5432'

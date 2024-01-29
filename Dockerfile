@@ -26,10 +26,16 @@ WORKDIR /app
 # Copy only the production dependencies and compiled code from the previous stage
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/src/common/migrations ./dist/common/migrations
+COPY --from=build /app/src/common/migrations ./src/common/migrations
 COPY package.json yarn.lock ./
+
+COPY --from=build /app/startup.sh ./
+RUN chmod +x ./startup.sh
 
 # Expose port 3000 for the web server
 EXPOSE 3000
 
-# Start the application
-CMD ["yarn", "start:prod"]
+# Start the application using the startup script
+CMD ["./startup.sh"]
+

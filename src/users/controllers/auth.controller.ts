@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 
 import { plainToClass } from 'class-transformer';
 import { AuthGuard, AuthUser } from '../services/auth.guard';
+import { ApiHeader } from '@nestjs/swagger';
 
 @Controller({ path: 'auth', version: '1' })
 export class AuthController {
@@ -17,6 +18,7 @@ export class AuthController {
 
   @Get()
   @UseGuards(AuthGuard)
+  @ApiHeader({ name: 'Authorization' })
   async getAuth(@AuthUser() user) {
     return user;
   }

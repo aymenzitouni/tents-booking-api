@@ -14,8 +14,9 @@ export default () => ({
     ssl: false,
     poolSize: 60,
     autoLoadEntities: true,
-    synchronize: false,
+    synchronize: true,
     logging: false,
+    migrationsRun: true,
     migrations: [MIGRATIONS_BUILD_DEFAULT_PATH],
     cli: {
       migrationsDir: MIGRATIONS_CLI_PATH,
@@ -25,5 +26,9 @@ export default () => ({
     global: true,
     secret: process.env.JWT_SECRET,
     signOptions: { expiresIn: JWT_DEFAULT_EXPRISE_IN },
+  },
+  defaultUser: {
+    email: String(process.env.DEFAULT_USER_EMAIL),
+    password: String(process.env.DEFAULT_USER_PASSWORD),
   },
 });

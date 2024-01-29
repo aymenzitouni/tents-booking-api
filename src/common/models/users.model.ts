@@ -12,5 +12,5 @@ export class UsersModel {
   password: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  createdAt?: Date;
 }

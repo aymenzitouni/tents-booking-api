@@ -14,4 +14,9 @@ export class UsersRepository {
   async findOneById(userId: string) {
     return await this.users.findOne({ where: { id: userId } });
   }
+
+  async create(payload: UsersModel) {
+    const data = this.users.create(payload);
+    await this.users.save(data);
+  }
 }

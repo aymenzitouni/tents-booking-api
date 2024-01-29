@@ -32,6 +32,7 @@ export async function createDataSource() {
     synchronize: false,
     entities: [UsersModel],
     migrationsTableName: 'typeorm_migrations',
+    migrationsRun: true,
   } as DataSourceOptions);
 }
 
